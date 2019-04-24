@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>用AJAX以JSON方式获取数据</title>
+    <script type="text/javascript" src="jquery.min.js"></script>
+</head>
+<body>
+
+<input type="button" value="通过AJAX获取多个Hero对象111" id="sender">
+
+<div id="messageDiv"></div>
+
+<script>
+
+    $("#sender").click(
+        function () {
+            var url = "getManyCategories";
+
+            $.post(
+                url,
+                function (data) {
+                    console.log(data);
+                    var categories = $.parseJSON(data);
+                    console.log(categories.length);
+
+                    for (i in categories) {
+                        var old = $("#messageDiv").html();
+                        var category = categories[i];
+                        $("#messageDiv").html(old + "<br>" + category.id + "   -----   " + category.name);
+                    }
+                }
+            );
+        }
+    )
+    ;
+
+</script>
+
+</body>
+</html>
